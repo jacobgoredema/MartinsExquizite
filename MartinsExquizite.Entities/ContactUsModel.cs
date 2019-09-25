@@ -19,17 +19,21 @@ namespace MartinsExquizite.Entities
         [Display(Name ="Last Name:")]
         public string LastName { get; set; }
 
+        [Display(Name = "Phone:")]
         [Required(ErrorMessage ="Phone is required")]
         public string Mobile { get; set; }
 
+        [Display(Name = "Email:")]
         [Required(ErrorMessage ="Email is required")]
         [DataType(DataType.EmailAddress,ErrorMessage ="Invlid email address")]
         public string Email { get; set; }
 
+        [Display(Name = "Message:")]
         [Required(ErrorMessage ="Comment is required")]
         [DataType(DataType.MultilineText)]
         public string Comment { get; set; }
 
+        [Display(Name = "Department:")]
         public string Department { get; set; }
 
         public Dictionary<string,string> Departments { get; set; }
