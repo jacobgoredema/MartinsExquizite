@@ -1,17 +1,135 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model MartinsExquizite.Web.ViewModels.ContactUsVm
+
+@section meta
+{
+    <meta name="keywords" content="Martins Exquisite, office, phone, address, email, contact" />
+    <meta name="description" content="Contact information for Martins Exquisite. You can fill in the form to send us an email, or use the details to contact us via phone." />
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@{
+    ViewBag.Title = "Contact Us";
+}
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<h2>Contact</h2>
+
+
+
+
+
+<section class="contact-sec page-section-pt">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-title text-center">
+                    <h2 class="title">Get in Touch With us</h2>
+                    <p>To contact us by email. please use the form below:</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-5">
+                <div class="address-block fill">
+                    <i class="glyph-icon flaticon-construction-5"></i>
+                    <h3 class="title">Location :</h3>
+                    <span>Head office Belgrade Ldo St,<br>United States</span>
+                </div>
+                <div class="address-block fill">
+                    <i class="glyph-icon flaticon-technology-2"></i>
+                    <h3 class="title">Phone :</h3>
+                    <span>+(000) 123 456 7890</span>
+                    <span>+(111) 000 123 456</span>
+                </div>
+                <div class="address-block fill">
+                    <i class="glyph-icon flaticon-email"></i>
+                    <h3 class="title">Mail :</h3>
+                    <a href="#">mail@belgradetraining.com</a>
+                    <a href="#">info@belgradetraining.com</a>
+                </div>
+                <div class="address-block fill">
+                    <i class="glyph-icon flaticon-fax"></i>
+                    <h3 class="title">Fax :</h3>
+                    <span>+(000) 123 456 7890</span>
+                    <span>+(111) 000 123 456</span>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-7">
+                <div class="defoult-form">
+                    <div id="formmessage" style="display:none">@ViewBag.Message</div>
+
+                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new{ id = "contactform"}))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group ">
+                                @Html.LabelFor(m => m.Item.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Item.FirstName, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Item.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Item.LastName, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Item.LastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Item.Mobile, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Item.Mobile, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Item.Email, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Item.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Item.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(x => x.Item.Department, new SelectList(Model.Item.Departments.AsEnumerable(), "Key", "Value"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Item.Department, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.Item.Comment, 5, 5, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Item.Comment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Submit Now" class="button border animated middle-fill" />                                    
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+@*                    <div id="ajaxloader" style="display:none"><img class="center-block" src="images/loading.gif" alt=""></div>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid pt-60">
+        <div class="row no-gutter">
+            <div class="col-sm-12 ">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8351288872545!2d144.9556518!3d-37.8173306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1443621171568" width="100%" height="400" style="vertical-align:top; border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MartinsExquizite.Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,8 +23,24 @@ namespace MartinsExquizite.Web.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            return View(new ContactUsVm());
+        }
 
+        [HttpPost]
+        public ActionResult Contact(ContactUsVm vm)
+        {
+            if (ModelState.IsValid)
+            {
+                vm.SendMail();
+                ViewBag.Message = vm.Message;
+
+                return RedirectToAction("Success", "Home");
+            }
+            return View(vm);
+        }
+
+        public ActionResult Success()
+        {
             return View();
         }
     }
