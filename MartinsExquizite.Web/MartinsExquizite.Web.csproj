@@ -761,6 +761,9 @@
     <Content Include="Content\revolution\fonts\revicons\revicons.ttf" />
     <Content Include="Content\revolution\fonts\revicons\revicons.woff" />
     <Content Include="Content\revolution\js\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Navigation.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_TopNavigation.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
