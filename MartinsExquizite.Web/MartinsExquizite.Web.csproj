@@ -168,12 +168,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Framework\Config.cs" />
     <Compile Include="Framework\Helpers\EmailHelper.cs" />
+    <Compile Include="Framework\Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Framework\Helpers\StringHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,6 +188,31 @@
     <Compile Include="ViewModels\ContactUsVm.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin\animate.css" />
+    <Content Include="Content\admin\bootstrap.css" />
+    <Content Include="Content\admin\bootstrap.min.css" />
+    <Content Include="Content\admin\email.css" />
+    <Content Include="Content\admin\landing\avatar_all.png" />
+    <Content Include="Content\admin\landing\header_one.jpg" />
+    <Content Include="Content\admin\landing\header_two.jpg" />
+    <Content Include="Content\admin\landing\word_map.png" />
+    <Content Include="Content\admin\patterns\1.png" />
+    <Content Include="Content\admin\patterns\2.png" />
+    <Content Include="Content\admin\patterns\3.png" />
+    <Content Include="Content\admin\patterns\4.png" />
+    <Content Include="Content\admin\patterns\5.png" />
+    <Content Include="Content\admin\patterns\6.png" />
+    <Content Include="Content\admin\patterns\7.png" />
+    <Content Include="Content\admin\patterns\congruent_pentagon.png" />
+    <Content Include="Content\admin\patterns\header-profile-skin-1.png" />
+    <Content Include="Content\admin\patterns\header-profile-skin-2.png" />
+    <Content Include="Content\admin\patterns\header-profile-skin-3.png" />
+    <Content Include="Content\admin\patterns\header-profile.png" />
+    <Content Include="Content\admin\patterns\otis_redding.png" />
+    <Content Include="Content\admin\patterns\shattered.png" />
+    <Content Include="Content\admin\patterns\triangular.png" />
+    <Content Include="Content\admin\plugins\blueimp\jquery.blueimp-gallery.min.js" />
+    <Content Include="Content\admin\style.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -764,6 +791,9 @@
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Navigation.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_TopNavigation.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Content\admin\bootstrap.css.map" />
+    <Content Include="Content\admin\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -776,7 +806,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -814,8 +846,74 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\admin\plugins\bootstrap-markdown\" />
+    <Folder Include="Content\admin\plugins\bootstrap-tagsinput\" />
+    <Folder Include="Content\admin\plugins\bootstrapTour\" />
+    <Folder Include="Content\admin\plugins\c3\" />
+    <Folder Include="Content\admin\plugins\chartist\" />
+    <Folder Include="Content\admin\plugins\chartJs\" />
+    <Folder Include="Content\admin\plugins\chosen\" />
+    <Folder Include="Content\admin\plugins\clipboard\" />
+    <Folder Include="Content\admin\plugins\clockpicker\" />
+    <Folder Include="Content\admin\plugins\codemirror\" />
+    <Folder Include="Content\admin\plugins\colorpicker\" />
+    <Folder Include="Content\admin\plugins\cropper\" />
+    <Folder Include="Content\admin\plugins\d3\" />
+    <Folder Include="Content\admin\plugins\datamaps\" />
+    <Folder Include="Content\admin\plugins\datapicker\" />
+    <Folder Include="Content\admin\plugins\dataTables\" />
+    <Folder Include="Content\admin\plugins\daterangepicker\" />
+    <Folder Include="Content\admin\plugins\diff_match_patch\" />
+    <Folder Include="Content\admin\plugins\dotdotdot\" />
+    <Folder Include="Content\admin\plugins\dropzone\" />
+    <Folder Include="Content\admin\plugins\dualListbox\" />
+    <Folder Include="Content\admin\plugins\easypiechart\" />
+    <Folder Include="Content\admin\plugins\flot\" />
+    <Folder Include="Content\admin\plugins\footable\" />
+    <Folder Include="Content\admin\plugins\fullcalendar\" />
+    <Folder Include="Content\admin\plugins\gritter\" />
+    <Folder Include="Content\admin\plugins\i18next\" />
+    <Folder Include="Content\admin\plugins\iCheck\" />
+    <Folder Include="Content\admin\plugins\idle-timer\" />
+    <Folder Include="Content\admin\plugins\ionRangeSlider\" />
+    <Folder Include="Content\admin\plugins\jasny\" />
+    <Folder Include="Content\admin\plugins\jeditable\" />
+    <Folder Include="Content\admin\plugins\jqGrid\" />
+    <Folder Include="Content\admin\plugins\jquery-ui\" />
+    <Folder Include="Content\admin\plugins\jsKnob\" />
+    <Folder Include="Content\admin\plugins\jsTree\" />
+    <Folder Include="Content\admin\plugins\justified-gallery\" />
+    <Folder Include="Content\admin\plugins\jvectormap\" />
+    <Folder Include="Content\admin\plugins\ladda\" />
+    <Folder Include="Content\admin\plugins\masonary\" />
+    <Folder Include="Content\admin\plugins\metisMenu\" />
+    <Folder Include="Content\admin\plugins\morris\" />
+    <Folder Include="Content\admin\plugins\nestable\" />
+    <Folder Include="Content\admin\plugins\nouslider\" />
+    <Folder Include="Content\admin\plugins\pace\" />
+    <Folder Include="Content\admin\plugins\pdfjs\" />
+    <Folder Include="Content\admin\plugins\peity\" />
+    <Folder Include="Content\admin\plugins\preetyTextDiff\" />
+    <Folder Include="Content\admin\plugins\pwstrength\" />
+    <Folder Include="Content\admin\plugins\rickshaw\" />
+    <Folder Include="Content\admin\plugins\select2\" />
+    <Folder Include="Content\admin\plugins\slick\" />
+    <Folder Include="Content\admin\plugins\slimscroll\" />
+    <Folder Include="Content\admin\plugins\sparkline\" />
+    <Folder Include="Content\admin\plugins\steps\" />
+    <Folder Include="Content\admin\plugins\summernote\" />
+    <Folder Include="Content\admin\plugins\sweetalert\" />
+    <Folder Include="Content\admin\plugins\switchery\" />
+    <Folder Include="Content\admin\plugins\tinycon\" />
+    <Folder Include="Content\admin\plugins\toastr\" />
+    <Folder Include="Content\admin\plugins\topojson\" />
+    <Folder Include="Content\admin\plugins\touchpunch\" />
+    <Folder Include="Content\admin\plugins\touchspin\" />
+    <Folder Include="Content\admin\plugins\typehead\" />
+    <Folder Include="Content\admin\plugins\validate\" />
+    <Folder Include="Content\admin\plugins\video\" />
+    <Folder Include="Content\admin\plugins\wow\" />
     <Folder Include="Views\Contact\" />
   </ItemGroup>
   <ItemGroup>
