@@ -55,7 +55,7 @@
                 <div class="defoult-form">
                     <div id="formmessage" style="display:none">@ViewBag.Message</div>
 
-                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new{ id = "contactform"}))
+                    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new{ id = ""}))
                     {
                         @Html.AntiForgeryToken()
 
