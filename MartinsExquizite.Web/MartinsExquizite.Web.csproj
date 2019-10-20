@@ -178,6 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Framework\Config.cs" />
+    <Compile Include="Framework\Helpers\ConfigurationsHelper.cs" />
     <Compile Include="Framework\Helpers\EmailHelper.cs" />
     <Compile Include="Framework\Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Framework\Helpers\StringHelper.cs" />
@@ -189,7 +190,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BaseVm.cs" />
     <Compile Include="ViewModels\ContactUsVm.cs" />
+    <Compile Include="ViewModels\ProjectListingVm.cs" />
+    <Compile Include="ViewModels\ProjectsVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin\animate.css" />
@@ -2491,6 +2495,14 @@
     <ProjectReference Include="..\MartinsExquizite.Entities\MartinsExquizite.Entities.csproj">
       <Project>{424700FD-B2F6-4942-9A7F-35EA6AAAA1E2}</Project>
       <Name>MartinsExquizite.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MartinsExquizite.Service\MartinsExquizite.Service.csproj">
+      <Project>{28728504-A832-486A-AA46-8164EBC7C825}</Project>
+      <Name>MartinsExquizite.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MartinsExquizite.Shared\MartinsExquizite.Shared.csproj">
+      <Project>{2753B9F5-7837-4C5E-B7BC-C7B93057A2C3}</Project>
+      <Name>MartinsExquizite.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
