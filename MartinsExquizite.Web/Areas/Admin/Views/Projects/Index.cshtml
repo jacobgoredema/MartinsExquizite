@@ -1,7 +1,36 @@
-﻿
+﻿@model MartinsExquizite.Web.ViewModels.ProjectListingVm
+@*@using MartinsExquizite.Web.Framework.Helpers*@
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Project Index Listing";
+    var categoryId = Model.CategoryId.HasValue ? Model.CategoryId.Value : 0;
 }
 
-<h2>Index</h2>
+<div class="row mt-2">
+    <div class="col-lg-12 col-md-12">
+        <h2>Projects</h2>
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <form action="@Url.ListAction("Projects")">
+            <div class="input-group mb-3">
+                <input type="text" name="searchterm" value="@Model.SearchTerm" class="form-control" placeholder="Search ...." />
+                <select class="form-control custom-select" name="categoryid">
+                    <option value="0">Select Category...</option>
+                    @foreach (var category in Model.Categories.OrderBy(x => x.Name))
+                    {
+                        var selected = category.Id == categoryId ? "selected" : string.Empty;
+                        <option value="@category.Id" @selected>@category.Name</option>
+                    }
+                </select>
 
+                <button type="submit" class="form-control btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                <a href="@Url.ListAction("Projects")" role="button" class="form-control btn btn-primary"><i class="fas fa-redo-alt" Reset</a>
+                <a href="@Url.ListAction("Projects")" role="button" class="form-control btn btn-success"><i class="fas fa-plus" Create Product</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Listing", Model);}
+    </div>
+</div>

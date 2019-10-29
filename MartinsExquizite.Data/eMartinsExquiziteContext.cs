@@ -20,6 +20,7 @@ namespace MartinsExquizite.Data
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<ProjectPicture> ProjectPictures { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
 
         public static eMartinsExquiziteContext Create()
         {

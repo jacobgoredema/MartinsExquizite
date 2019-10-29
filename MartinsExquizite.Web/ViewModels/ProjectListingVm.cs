@@ -16,4 +16,13 @@ namespace MartinsExquizite.Web.ViewModels
 
         public Pager Pager { get; set; }
     }
+
+    public class ProjectActionVm:PageVm
+    {
+
+
+
+        public List<ProjectPicture> ProjectPicturesList { get; set; }
+        public List<Category> Categories { get; set; }
+    }
 }
