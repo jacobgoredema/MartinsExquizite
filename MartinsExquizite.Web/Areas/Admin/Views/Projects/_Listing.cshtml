@@ -97,6 +97,44 @@
             </ul>
         </nav>
     }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            No Products found.
+        </div>
+    }
+    <script>
+        $(".deleteButton").click(function () {
+            var recordId = $(this).attr("data-id");
+
+            swal({
+                title: "Are you sure you want to delete this record?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $("#dtLoader").show();
+                    $("#response-holder").hide();
+
+                    $.ajax({
+                        url: "@Url.DeleteAction("Projects")",
+                        type: "post",
+                        data: { id: recordId }
+                    })
+                    .done(function (response) {
+                        if (response != null && response.Success != undefined && response.Success) {
+                            window.locatio.reload();
+                        }
+                        else {
+                            swal("Error!", respon.Message, "error");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 }
 
 

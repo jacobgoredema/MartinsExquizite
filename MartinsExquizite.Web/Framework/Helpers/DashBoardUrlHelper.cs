@@ -55,13 +55,46 @@ namespace MartinsExquizite.Web
             return routeUrl.ToLower();
         }
 
-        public static string Projects(this UrlHelper helper,string searchTerm="",int? pageNo=0,int? category=0)
+        public static string Projects(this UrlHelper helper,string searchTerm="",int? pageNo=0,int? categoryId=0)
         {
+            string routeUrl = string.Empty;
+            var routeValues = new RouteValueDictionary();
 
+            routeValues.Add("Controller", "Projects");
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                routeValues.Add("searchTerm", searchTerm);
+            }
+
+            if (categoryId.HasValue&&categoryId.Value>0)
+            {
+                routeValues.Add("CategoryId", categoryId.Value);
+            }
+
+            if (pageNo.HasValue&&pageNo.Value>1)
+            {
+                routeValues.Add("pageNo", pageNo.Value);
+            }
+
+            routeUrl = helper.RouteUrl("Entity", routeValues);
+            routeUrl = HttpUtility.UrlDecode(routeUrl, System.Text.Encoding.UTF8);
+
+            return routeUrl.ToLower();
         }
 
+        public static string DeleteAction(this UrlHelper helper, string controller)
+        {
+            string routeUrl = string.Empty;
+            routeUrl = helper.RouteUrl("EntityDelete", new
+            {
+                controller = controller
+            });
 
+            routeUrl = HttpUtility.UrlDecode(routeUrl, System.Text.Encoding.UTF8);
 
+            return routeUrl.ToLower();
+        }
 
 
     }
