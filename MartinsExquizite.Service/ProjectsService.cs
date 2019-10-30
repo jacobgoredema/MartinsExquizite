@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MartinsExquizite.Data;
 using MartinsExquizite.Entities.Models;
-using MartinsExquizite.Data;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System;
 
 namespace MartinsExquizite.Service
 {
     public class ProjectsService
     {
         eMartinsExquiziteContext context = new eMartinsExquiziteContext();
-
+        #region Define as Singleton
         private static ProjectsService _Instance;
 
         public static ProjectsService Instance
@@ -26,6 +25,12 @@ namespace MartinsExquizite.Service
                 return (_Instance);
             }
         }
+
+        public ProjectsService()
+        {
+
+        }
+        #endregion
 
         public List<Project> SearchProjects(List<int> CategoryIds, string searchTerm, int? pageNo, int pageSize)
         {
@@ -62,6 +67,36 @@ namespace MartinsExquizite.Service
             }
 
             return Projects.Count();
+        }
+
+        public Project GetProjectById(int Id)
+        {
+            return context.Projects.Find(Id);
+        }
+
+        public bool DeleteProject(int Id)
+        {
+            var project = context.Projects.Find(Id);
+            context.Projects.Remove(project);
+
+            return context.SaveChanges() > 0;
+        }
+
+        public void UpdateProject(Project project)
+        {
+            var existingProject = context.Projects.Find(project.Id);
+            context.ProjectPictures.RemoveRange(existingProject.ProjectPictures);
+            context.Entry(existingProject).CurrentValues.SetValues(project);
+            context.ProjectPictures.AddRange(project.ProjectPictures);
+
+            context.SaveChanges();
+        }
+
+        public void SaveProject(Project project)
+        {
+            context.Projects.Add(project);
+
+            context.SaveChanges();
         }
     }
 }

@@ -2065,6 +2065,7 @@
     <Content Include="Areas\Admin\Views\Articles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\_Listing.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Action.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\demo\chartjs-demo.js" />
     <Content Include="Scripts\demo\dashboard-demo.js" />
