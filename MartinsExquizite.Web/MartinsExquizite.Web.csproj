@@ -193,6 +193,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BaseVm.cs" />
+    <Compile Include="ViewModels\CategoryActionVm.cs" />
     <Compile Include="ViewModels\ContactUsVm.cs" />
     <Compile Include="ViewModels\ProjectListingVm.cs" />
     <Compile Include="ViewModels\ProjectsVm.cs" />

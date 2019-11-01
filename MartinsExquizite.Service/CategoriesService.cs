@@ -32,6 +32,16 @@ namespace MartinsExquizite.Service
 
         }
 
+        public bool DeleteCategory(int Id)
+        {
+            var category = context.Categories.Find(Id);
+            context.Categories.Remove(category);
+
+            return context.SaveChanges() > 0;
+        }
+
+        
+
         public List<Category> GetAllCategories()
         {
             return context.Categories.OrderBy(x => x.DisplaySeqNo).ToList();
