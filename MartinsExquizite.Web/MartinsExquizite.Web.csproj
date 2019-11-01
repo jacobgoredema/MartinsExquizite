@@ -182,6 +182,7 @@
     <Compile Include="Framework\Helpers\DashBoardUrlHelper.cs" />
     <Compile Include="Framework\Helpers\EmailHelper.cs" />
     <Compile Include="Framework\Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Framework\Helpers\PictureHelper.cs" />
     <Compile Include="Framework\Helpers\StringHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

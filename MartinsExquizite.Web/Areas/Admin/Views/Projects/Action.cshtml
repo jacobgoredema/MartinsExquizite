@@ -1,118 +1,280 @@
 ﻿@model MartinsExquizite.Web.ViewModels.ProjectActionVm
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ProjectActionVm</h4>
+<div class="row mt-2">
+    <div class="col-lg-12 col-md-12">
+        <h2>@Model.PageTitle</h2>
+        <p>@Model.Description</p>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.PageTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PageTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PageTitle, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12">
+        <form action=""id="actionForm" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" name="CategoryId">
+                    @foreach (var category in Model.Categories.OrderBy(x => x.Name))
+                    {
+                        var selected = Model.CategoryId == category.Id ? "selected" : string.Empty;
+                        <option value="@category.Id" @selected>@category.Name</option>
+                    }
+                </select>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PageDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PageDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PageDescription, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Name:</label>
+                <input class="form-control" placeholder="Add Name" name="Name" value="@Model.Name" />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PageUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PageUrl, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Summary:</label>
+                <input class="form-control" placeholder="Add Summary" name="Summary" value="@Model.Summary" />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PageImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PageImageUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PageImageUrl, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Description:</label>
+                <input class="form-control" placeholder="Add description" name="Description" value="@Model.Description" />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Price:</label>
+                <input class="form-control" name="Price" value="@Model.Price" />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Summary, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.isFeatured, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.isFeatured)
-                    @Html.ValidationMessageFor(model => model.isFeatured, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" value="true" id="isFeatured" class="form-check-input" name="isFeatured" @(Model.isFeatured ? "checked":string.Empty) />
+                    <input type="hidden" name="isFeatured" value="false" />
+                    <label class="form-check-label" for="isFeatured">Is Featured</label>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectPictures, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectPictures, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectPictures, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Select Pictures</label>
+                <input id="productPictures" class="form-control" type="file" multiple />
+                <div id="picturesArea" class="row m-0 pb-2">
+                    @if (Model.ProjectPicturesList!=null&&Model.ProjectPicturesList.Count>0)
+                    {
+                        foreach (var picture in Model.ProjectPicturesList)
+                        {
+                            <div class="card mt-2" style="width:300px;">
+                                <div class="card-body text-center">
+                                    <img class="image card-img-top img-thumbnail" src="@Html.PictureSource(picture.Picture.URL)" data-id="@picture.PictureId" style="width:250px;height:250px;" alt="@Model.Name" />
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <input type="radio" name="ThumbnailPicture" value="@picture.PictureId" @(picture.PictureId==Model.ThumbnailPicture?"checked":string.Empty) class="mr-1" />
+                                        <label>Set as Thumbnail Image</label>
+                                    </li>
+                                </ul>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-danger" onclick="removeImage(this)">
+                                        <i class="fas fa-times mr-1"></i>
+                                         Remove
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <input type="hidden" name="ProductPictures" id="pictureIds" />
             </div>
-        </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="Name" value="@Model.isFeatured" />
+            </div>
+            <hr />
+            <div class="form-group">
+                @if (Model.Id>0)
+                {
+                    <button class="btn btn-success" type="submit" id="actionButton">
+                        <i class="fas fa-edit mr-1"></i>
+                         Update
+                    </button>
+                    <button class="deleteButton btn btn-danger" type="button" data-id="@Model.Id">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                         Delete
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-success" type="submit" id="actionButton">
+                        <i class="fas fa-plus mr-1"></i>
+                         Save
+                    </button>
+                }
+                <a class="btn btn-secondary" href="@Url.ListAction("Projects")">
+                    <i class="fas fa-angle-double-left mr-1"></i>
+                     Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ThumbnailPicture, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ThumbnailPicture, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ThumbnailPicture, "", new { @class = "text-danger" })
-            </div>
+<div id="imageTemplate" style="display:none">
+    <div class="card mt-2" style="width:300px;">
+        <div class="card-body text-center">
+            <img class="image card-img-top img-thumbnail" src="" style="width:250px;height:250px;" />
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <input type="radio" name="ThumbnailPicture" class="mr-1" value="" />
+                <label>Set as Thumbnail Image</label>
+            </li>
+        </ul>
+        <div class="card-footer">
+            <button type="button" class="btn btn-danger" onclick="removeImage(this)">
+                <i class="fas fa-times mr-1">
+                     Remove
+                </i>
+            </button>
         </div>
     </div>
-}
+</div>
+
+<script>
+
+        CKEDITOR.replace('Description', { height: 700 });
+
+    $("#actionForm").validate({
+        errorClass: "alert alert-danger",
+        errorElement: "div",
+        rules: {
+            Name: {
+                required: true,
+                minlength: 15,
+                maxlength: 150
+            },
+            CategoryId: {
+                required: true
+            },
+            Summary: {
+                required: true,
+                minlength: 20,
+                maxlength: 200
+            },
+            Description: {
+                required: true,
+                minlength: 20
+            },
+            Price: {
+                required: true,
+                range: [1, 10000000]
+            },
+            ProductPictures: {
+                required: true,
+            },
+        },
+        messages: {
+            Name: {
+                required: "Name is required.",
+                minlength: "Minimum Length is 15.",
+                maxlength: "Maximum Length is 150."
+            },
+            CategoryId: {
+                required: "Please select a category."
+            },
+            Summary: {
+                required: "Summary is required.",
+                minlength: "Minimum Length is 20.",
+                maxlength: "Maximum Length is 200."
+            },
+            Description: {
+                required: "Description is required.",
+                minlength: "Minimum Length is 20.",
+            },
+            Price: {
+                required: "Price is required.",
+                range: "Price must be between 1 to 10000000.",
+            },
+            ProductPictures: {
+                required: "Please select atleast one picture.",
+            },
+        },
+        highlight: function (element, errorClass) {
+            $(element).removeClass(errorClass);
+        }
+    });
+
+    $("#productPictures").change(function () {
+
+		var pictures = this.files;
+
+		var picsData = new FormData();
+
+		for (var i = 0; i < pictures.length; i++) {
+			picsData.append("Picture", pictures[i]);
+		}
+
+		$.ajax({
+			url: "@Url.Action("UploadPictures", "Shared", new { area = "" })",
+			type: "post",
+			data: picsData,
+			dateType: "json",
+			processData: false,
+			contentType: false
+		})
+		.done(function (responses) {
+			for (var i = 0; i < responses.length; i++) {
+				var picResponse = responses[i];
+
+				AttachNewImage(picResponse.pictureURL, picResponse.Id);
+			}
+		});
+    });
+
+    function AttachNewImage(imageURL, imageId) {
+        var $newimgHTML = $("#imageTemplate").clone();
+
+        $newimgHTML.find(".image").attr("src", "/content/images/" + imageURL);
+        $newimgHTML.find(".image").attr("data-id", imageId);
+        $newimgHTML.find("input[name=ThumbnailPicture]").val(imageId);
+
+        $("#picturesArea").append($newimgHTML.html());
+    }
+
+    $("#actionButton").click(function () {
+        updateEditFields();
+
+        var imageIds = [];
+        $("#picturesArea .image").each(function () {
+            var imageId = $(this).attr("data-id");
+
+            imageIds.push(imageId);
+        });
+        $("#pictureIds").val(imageIds.join());
+
+        if ($("#actionForm").valid()) {
+            $("#actionForm").submit()
+        }
+    });
+
+    $(".deleteButton").click(function () {
+        var recordId = $(this).attr("data-id");
+
+        swal({
+			title: "Are you sure you want to delete this record?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				$("#dtLoader").show();
+				$("#response-holder").hide();
+
+				$.ajax({
+					url: "@Url.DeleteAction("Products")",
+                    type: "post",
+                    data: { id: recordId }
+				})
+                .done(function (response) {
+                    if (response != null && response.Success != undefined && response.Success) {
+                        window.location.href = "@Url.ListAction("Products")";
+				    }
+				    else {
+                        swal("Error!", response.Message, "error");
+				    }
+				});
+			}
+		});
+    });
+</script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

@@ -19,6 +19,25 @@ namespace MartinsExquizite.Web.Areas.Admin
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
+
+
+
+
+            context.MapRoute(
+                "EntityList",
+                "Dashboard/{controller}/",
+                new { action = "Index" }
+                );
+
+
+
+            context.MapRoute(
+                "EntityDelete",
+                "Dashboard/{controller}/Delete",
+                new { action = "Delete" }
+                );
+
+
         }
     }
 }
