@@ -1,5 +1,7 @@
 ﻿using MartinsExquizite.Entities.Models;
 using MartinsExquizite.Service;
+using MartinsExquizite.Web.Framework.Extensions;
+using MartinsExquizite.Web.Framework.Helpers;
 using MartinsExquizite.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,34 +14,70 @@ namespace MartinsExquizite.Web.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         // GET: Admin/Categories
-        public ActionResult Index()
+        public ActionResult Index(int parentCategoryId, string searchTerm, int? pageNo)
         {
-            // TODO
-            return View();
+            var pageSize = ConfigurationsHelper.DashboardRecordsSizePerPage;
+            CategoriesListingVm model = new CategoriesListingVm();
+
+            model.PageTitle = "Categories";
+            model.PageDescription = "Categories Listing Page";
+            model.ParentCategoryId = parentCategoryId;
+            model.SearchTerm = searchTerm;
+            model.ParentCategory = CategoriesService.Instance.GetAllParentCategories();
+            model.Categories = CategoriesService.Instance.SearchCategories(parentCategoryId, searchTerm, pageNo, pageSize);
+
+            var totalCategories = CategoriesService.Instance.GetCategoriesCount(parentCategoryId, searchTerm);
+
+            model.Pager = new Pager(totalCategories, pageNo, pageSize);
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult Action(int? Id)
         {
-            return View();
+            CategoryActionVm model = new CategoryActionVm();
+            if (Id.HasValue)
+            {
+                var category = CategoriesService.Instance.GetCategoryById(Id.Value);
+
+                if (category == null)
+                    return HttpNotFound();
+
+                model.PageTitle = "Edit Category";
+                model.PageDescription = string.Format("Edit Category {0}.", category.Name);
+                model.ParentCategoryID = category.ParentCategoryId.HasValue ? category.ParentCategoryId.Value : 0;
+                model.Id = category.Id;
+                model.Name = category.Name;
+                model.Description = category.Description;
+                model.IsFeatured = category.isFeatured;
+            }
+            else
+            {
+                model.PageTitle = "Create Category";
+                model.PageDescription = "Create New Category";
+            }
+
+            model.Categories = CategoriesService.Instance.GetAllCategories();
+
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Action(CategoryActionVm model)
         {
-            if (model.Id>0)
+            if (model.Id > 0)
             {
                 var category = CategoriesService.Instance.GetCategoryById(model.Id);
                 if (category == null)
                     return HttpNotFound();
 
-                if (model.ParentCategoryID>0)
+                if (model.ParentCategoryID > 0)
                 {
-                    category.ParentCategoryID = model.ParentCategoryID;
+                    category.ParentCategoryId = model.ParentCategoryID;
                 }
                 else
                 {
-                    category.ParentCategoryID = null;
+                    category.ParentCategoryId = null;
                     category.ParentCategory = null;
                 }
 
@@ -54,9 +92,9 @@ namespace MartinsExquizite.Web.Areas.Admin.Controllers
             else
             {
                 Category category = new Category();
-                if (model.ParentCategoryID>0)
+                if (model.ParentCategoryID > 0)
                 {
-                    category.ParentCategoryID = model.ParentCategoryID;
+                    category.ParentCategoryId = model.ParentCategoryID;
                 }
 
                 category.Name = model.Name;

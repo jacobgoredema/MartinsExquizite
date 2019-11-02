@@ -30,7 +30,7 @@ namespace MartinsExquizite.Shared
 
         private static List<Category> GeCategoryChildren(int parentCategoryId, List<Category> allCategories)
         {
-            return allCategories.Where(x => x.ParentCategoryID == parentCategoryId).ToList();
+            return allCategories.Where(x => x.ParentCategoryId == parentCategoryId).ToList();
         }
     }
 }

@@ -178,6 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Framework\Config.cs" />
+    <Compile Include="Framework\Extensions\RegularExtensions.cs" />
     <Compile Include="Framework\Helpers\ConfigurationsHelper.cs" />
     <Compile Include="Framework\Helpers\DashBoardUrlHelper.cs" />
     <Compile Include="Framework\Helpers\EmailHelper.cs" />
@@ -2068,6 +2069,8 @@
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\_Listing.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\Action.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Action.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\_Listing.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\demo\chartjs-demo.js" />
     <Content Include="Scripts\demo\dashboard-demo.js" />

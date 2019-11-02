@@ -8,7 +8,7 @@ namespace MartinsExquizite.Entities.Models
 {
     public class Category:BaseEntity
     {
-        public int? ParentCategoryID { get; set; }
+        public int? ParentCategoryId { get; set; }
         public virtual Category ParentCategory { get; set; }
 
         public string Name { get; set; }
