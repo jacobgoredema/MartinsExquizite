@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -18,7 +19,7 @@ namespace MartinsExquizite.Web
             return routeUrl.ToLower();
         }
 
-        public static string ListAction(this UrlHelper helper,string controller, string searchTerm="",int? pageNo=0)
+        public static string ListAction(this UrlHelper helper, string controller, string searchTerm = "", int? pageNo = 0)
         {
             string routeUrl = string.Empty;
             var routeValues = new RouteValueDictionary();
@@ -29,7 +30,7 @@ namespace MartinsExquizite.Web
                 routeValues.Add("searchTerm", searchTerm);
             }
 
-            if(pageNo.HasValue&&pageNo.Value>1)
+            if (pageNo.HasValue && pageNo.Value > 1)
             {
                 routeValues.Add("pageNo", pageNo.Value);
             }
@@ -40,7 +41,7 @@ namespace MartinsExquizite.Web
             return routeUrl.ToLower();
         }
 
-        public static string EditAction(this UrlHelper helper, string controller,object Id)
+        public static string EditAction(this UrlHelper helper, string controller, object Id)
         {
             string routeUrl = string.Empty;
 
@@ -55,7 +56,7 @@ namespace MartinsExquizite.Web
             return routeUrl.ToLower();
         }
 
-        public static string Projects(this UrlHelper helper,string searchTerm="",int? pageNo=0,int? categoryId=0)
+        public static string Projects(this UrlHelper helper, string searchTerm = "", int? pageNo = 0, int? categoryId = 0)
         {
             string routeUrl = string.Empty;
             var routeValues = new RouteValueDictionary();
@@ -67,12 +68,12 @@ namespace MartinsExquizite.Web
                 routeValues.Add("searchTerm", searchTerm);
             }
 
-            if (categoryId.HasValue&&categoryId.Value>0)
+            if (categoryId.HasValue && categoryId.Value > 0)
             {
                 routeValues.Add("CategoryId", categoryId.Value);
             }
 
-            if (pageNo.HasValue&&pageNo.Value>1)
+            if (pageNo.HasValue && pageNo.Value > 1)
             {
                 routeValues.Add("pageNo", pageNo.Value);
             }
@@ -95,6 +96,41 @@ namespace MartinsExquizite.Web
 
             return routeUrl.ToLower();
         }
+
+        public static string Categories(this UrlHelper helper, string searchTerm = "", int? pageNo = 0, int? parentCategoryId = 0)
+        {
+            string routeUrl = string.Empty;
+            var routeValues = new RouteValueDictionary();
+            routeValues.Add("Controller", "Categories");
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                routeValues.Add("searchTerm", searchTerm);
+            }
+
+            if (parentCategoryId.HasValue && parentCategoryId.Value > 0)
+            {
+                routeValues.Add("parentCategoryId", parentCategoryId.Value);
+            }
+
+            if (pageNo.HasValue && pageNo.Value > 1)
+            {
+                routeValues.Add("pageNo", routeValues);
+            }
+
+            routeUrl = helper.RouteUrl("EntityList", routeValues);
+            routeUrl = HttpUtility.UrlDecode(routeUrl, Encoding.UTF8);
+
+            return routeUrl.ToLower();
+        }
+
+
+
+
+
+
+
+
 
 
     }
