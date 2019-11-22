@@ -124,7 +124,18 @@ namespace MartinsExquizite.Web
             return routeUrl.ToLower();
         }
 
+        public static string CreateAction(this UrlHelper helper,string controller)
+        {
+            string routeUrl = string.Empty;
+            routeUrl = helper.RouteUrl("EntityCreate", new
+            {
+                controller = controller,
+            });
 
+            routeUrl = HttpUtility.UrlDecode(routeUrl, System.Text.Encoding.UTF8);
+
+            return routeUrl.ToLower();
+        }
 
 
 

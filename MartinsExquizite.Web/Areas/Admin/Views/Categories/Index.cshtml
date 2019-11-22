@@ -1,63 +1,42 @@
-﻿@model IEnumerable<MartinsExquizite.Web.ViewModels.CategoriesListingVm>
+﻿@model MartinsExquizite.Web.ViewModels.CategoriesListingVm
 
 @{
-    ViewBag.Title = "Index";
+    var categoryId = Model.ParentCategoryId.HasValue ? Model.ParentCategoryId.Value : 0;
 }
 
-<h2>Index</h2>
+<div class="row mt-2">
+    <div class="col-lg-12 col-md-12">
+        <h2>Categories</h2>
+        <hr />
+    </div>
+    <div class="col-md-12">
+        <form action="@Url.ListAction("Categories")">
+            <div class="input-group mb-3">
+                <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search" />
+                <select class="form-control custom-select" name="parentCategoryId">
+                    <option value="0">Select Parent Category...</option>
+                    @foreach (var category in Model.ParentCategory.OrderBy(x=>x.Name))
+                    {
+                        var selected = category.Id == categoryId ? "selected" : string.Empty;
+                        <option value="@category.Id" @selected>@category.Name</option>
+                    }
+                </select>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PageTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PageImageUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ParentCategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SearchTerm)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PageImageUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ParentCategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SearchTerm)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+                <button type="submit" class="form-control btn btn-primary">
+                    <i class="fas fa-search"></i> Search
+                </button>
+                <a href="@Url.ListAction("Categories")" role="button" class="form-control btn btn-primary">
+                    <i class="fas fa-redo-alt"></i> Reset
+                </a>
+                <a href="@Url.CreateAction("Categories")" role="button" class="form-control btn btn-success">
+                    <i class="fas fa-plus"></i> Create Category
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-12">
+        @{ 
+            Html.RenderPartial("_Listing", Model);
+        }
+    </div>
+</div>

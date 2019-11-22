@@ -15,9 +15,9 @@ namespace MartinsExquizite.Web.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Admin",
+                "Admin",
+                new { controller="Admin", action = "Index", id = UrlParameter.Optional }
             );
 
 
