@@ -1,4 +1,5 @@
-﻿using MartinsExquizite.Web.Framework.Helpers;
+﻿using MartinsExquizite.Entities.Models;
+using MartinsExquizite.Web.Framework.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace MartinsExquizite.Web.ViewModels
         {
             PageCanonicalUrls = new List<string>();
         }
+    }
+
+    public class CommentablePageViewModel:PageVm
+    {
+        public int EntityId { get; set; }
+        public int RecordId { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 
     /// <summary>

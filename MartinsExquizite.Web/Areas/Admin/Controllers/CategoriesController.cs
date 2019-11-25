@@ -14,7 +14,7 @@ namespace MartinsExquizite.Web.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         // GET: Admin/Categories
-        public ActionResult Index(int parentCategoryId, string searchTerm, int? pageNo)
+        public ActionResult Index(int? parentCategoryId, string searchTerm, int? pageNo)
         {
             var pageSize = ConfigurationsHelper.DashboardRecordsSizePerPage;
             CategoriesListingVm model = new CategoriesListingVm();
@@ -28,7 +28,7 @@ namespace MartinsExquizite.Web.Areas.Admin.Controllers
 
             var totalCategories = CategoriesService.Instance.GetCategoriesCount(parentCategoryId, searchTerm);
 
-            model.Pager = new Pager(totalCategories, pageNo, pageSize);
+            //model.Pager = new Pager(totalCategories, pageNo, pageSize);
             return View(model);
         }
 

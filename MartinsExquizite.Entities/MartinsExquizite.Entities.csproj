@@ -60,6 +60,7 @@
     <Compile Include="ContactUsModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\eMartinsExquiziteUser.cs" />
     <Compile Include="Models\Picture.cs" />
